@@ -1,12 +1,22 @@
-.home-columns {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-}
+<div class="home-columns">
+  <div class="home-col">
+    <h3>Column 1</h3>
+    <ul>
+      <li>[[Note A]]</li>
+      <li>[[Note B]]</li>
+    </ul>
+  </div>
 
-.home-col {
-  background: var(--background-secondary);
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-}
+  <div class="home-col">
+    <h3>Column 2</h3>
+    <p>Intro, image, or featured links.</p>
+  </div>
+
+  <div class="home-col">
+    <h3>Column 3</h3>
+    <ul>
+      <li>[[Note C]]</li>
+      <li>[[Note D]]</li>
+    </ul>
+  </div>
+</div>
