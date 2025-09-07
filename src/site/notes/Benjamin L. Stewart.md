@@ -2,20 +2,25 @@
 {"dg-publish":true,"permalink":"/benjamin-l-stewart/","tags":["burnout","teaching","ELT","gardenEntry"]}
 ---
 
-# Benjamin L. Stewart
---- start-multi-column: ID_ne4r
-```column-settings
-Number of Columns: 2
-Largest Column: standard
-```
+<div class="home-columns">
 
-## Current Courses
+<div class="home-col">
+### Column 1
+- Link 1
+- Link 2
+- Link 3
+</div>
 
-## Course Archive
+<div class="home-col">
+### Column 2
+Some text, images, or embeds.
+</div>
 
---- column-break ---
+<div class="home-col">
+### Column 3
+- Note A
+- Note B
+- Note C
+</div>
 
-
-
---- end-multi-column
-
+</div>
