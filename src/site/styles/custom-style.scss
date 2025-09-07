@@ -1,22 +1,147 @@
-<div class="home-columns">
-  <div class="home-col">
-    <h3>Column 1</h3>
-    <ul>
-      <li>[[Note A]]</li>
-      <li>[[Note B]]</li>
-    </ul>
-  </div>
+/* =========
+   Color system (light)
+   Tweak ONLY these first; everything else inherits
+   ========= */
+:root {
+  --dg-bg: #fafbfc;                 /* page background */
+  --dg-surface: #ffffff;            /* card surface */
+  --dg-border: #e8ebf0;             /* light card border */
+  --dg-shadow: 0 1px 4px rgba(0,0,0,0.06);
 
-  <div class="home-col">
-    <h3>Column 2</h3>
-    <p>Intro, image, or featured links.</p>
-  </div>
+  --dg-text: #1f2937;               /* body text (slate-800) */
+  --dg-muted: #5b6472;              /* secondary text */
+  --dg-heading: #111827;            /* headings (near-black) */
 
-  <div class="home-col">
-    <h3>Column 3</h3>
-    <ul>
-      <li>[[Note C]]</li>
-      <li>[[Note D]]</li>
-    </ul>
-  </div>
-</div>
+  --dg-accent: #635bff;             /* purple/indigo accent */
+  --dg-accent-weak: #ebe9ff;        /* faint accent bg for chips/badges */
+
+  --dg-link: var(--dg-accent);
+  --dg-link-hover: #4f46e5;         /* indigo-600 */
+  --dg-code-bg: #f6f8fa;
+}
+
+/* Optional: dark mode alignment */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --dg-bg: #0d1117;
+    --dg-surface: #0f141b;
+    --dg-border: #1f2a37;
+    --dg-shadow: 0 1px 4px rgba(0,0,0,0.35);
+
+    --dg-text: #d6d9df;
+    --dg-muted: #9aa3af;
+    --dg-heading: #e5e7eb;
+
+    --dg-accent: #8b8af7;
+    --dg-accent-weak: #1b1a2f;
+
+    --dg-link: var(--dg-accent);
+    --dg-link-hover: #a3a3ff;
+    --dg-code-bg: #0b1220;
+  }
+}
+
+/* =========
+   Global polish to match docs-like feel
+   ========= */
+body {
+  background: var(--dg-bg);
+  color: var(--dg-text);
+}
+
+a {
+  color: var(--dg-link);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--dg-link-hover);
+  text-decoration: underline;
+}
+
+h1, h2, h3 {
+  color: var(--dg-heading);
+  letter-spacing: 0.1px;
+  margin-top: 0.2rem;
+}
+
+/* Subtle “section divider” like the docs */
+hr {
+  border: 0;
+  border-top: 1px solid var(--dg-border);
+  margin: 2rem 0;
+}
+
+/* =========
+   Three-column layout
+   ========= */
+.home-columns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin: 1rem 0 2rem;
+}
+
+/* Card-like columns with soft border & shadow */
+.home-col {
+  background: var(--dg-surface);
+  border: 1px solid var(--dg-border);
+  border-radius: 10px;
+  box-shadow: var(--dg-shadow);
+  padding: 1rem 1.1rem;
+}
+
+/* Headings inside cards */
+.home-col h3 {
+  margin: 0 0 0.6rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+/* Lists and spacing inside cards */
+.home-col ul {
+  margin: 0.25rem 0 0.25rem 1.1rem;
+}
+.home-col p, .home-col li {
+  color: var(--dg-text);
+}
+
+/* Optional: tiny “accent chips” for inline tags/labels */
+.home-col .chip {
+  display: inline-block;
+  padding: 0.12rem 0.45rem;
+  border-radius: 999px;
+  background: var(--dg-accent-weak);
+  color: var(--dg-accent);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+/* =========
+   Responsive breakpoints (docs-style responsiveness)
+   ========= */
+@media (max-width: 1100px) {
+  .home-columns { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .home-columns { grid-template-columns: 1fr; }
+}
+
+/* =========
+   Optional: tighten article width like the docs
+   ========= */
+.main-content, .content, .prose, .markdown-preview-view {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Optional: code blocks match docs’ subtle background */
+pre, code {
+  background: var(--dg-code-bg);
+}
+pre {
+  border: 1px solid var(--dg-border);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  overflow-x: auto;
+}
