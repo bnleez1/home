@@ -1,147 +1,150 @@
 /* =========
-   Color system (light)
-   Tweak ONLY these first; everything else inherits
+   Base layout + color tokens (tweak to taste)
    ========= */
 :root {
-  --dg-bg: #fafbfc;                 /* page background */
-  --dg-surface: #ffffff;            /* card surface */
-  --dg-border: #e8ebf0;             /* light card border */
-  --dg-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  --bg: var(--background-primary, #fafbfc);
+  --surface: var(--background-secondary, #ffffff);
+  --border: #e6e9ee;
+  --shadow: 0 1px 4px rgba(0,0,0,0.06);
 
-  --dg-text: #1f2937;               /* body text (slate-800) */
-  --dg-muted: #5b6472;              /* secondary text */
-  --dg-heading: #111827;            /* headings (near-black) */
+  --text: var(--text-normal, #1f2937);
+  --muted: #6b7280;
+  --heading: var(--text-title-h1, #111827);
 
-  --dg-accent: #635bff;             /* purple/indigo accent */
-  --dg-accent-weak: #ebe9ff;        /* faint accent bg for chips/badges */
+  --accent: #635bff;
+  --accent-weak: #ebe9ff;
 
-  --dg-link: var(--dg-accent);
-  --dg-link-hover: #4f46e5;         /* indigo-600 */
-  --dg-code-bg: #f6f8fa;
+  /* Column widths (desktop) */
+  --left-w: 300px;     /* left column width */
+  --middle-w: 1fr;     /* main grows */
+  --right-w: 320px;    /* right column width */
+
+  /* Vertical sizing for independent scroll */
+  --top-offset: 0px;   /* adjust if you have a fixed header/nav */
+  --bottom-offset: 0px;
+  --panel-radius: 10px;
 }
 
-/* Optional: dark mode alignment */
+/* Optional dark alignment */
 @media (prefers-color-scheme: dark) {
   :root {
-    --dg-bg: #0d1117;
-    --dg-surface: #0f141b;
-    --dg-border: #1f2a37;
-    --dg-shadow: 0 1px 4px rgba(0,0,0,0.35);
+    --bg: #0d1117;
+    --surface: #0f141b;
+    --border: #1f2a37;
+    --shadow: 0 1px 4px rgba(0,0,0,0.35);
 
-    --dg-text: #d6d9df;
-    --dg-muted: #9aa3af;
-    --dg-heading: #e5e7eb;
+    --text: #d6d9df;
+    --muted: #9aa3af;
+    --heading: #e5e7eb;
 
-    --dg-accent: #8b8af7;
-    --dg-accent-weak: #1b1a2f;
-
-    --dg-link: var(--dg-accent);
-    --dg-link-hover: #a3a3ff;
-    --dg-code-bg: #0b1220;
+    --accent: #8b8af7;
+    --accent-weak: #1b1a2f;
   }
 }
 
-/* =========
-   Global polish to match docs-like feel
-   ========= */
-body {
-  background: var(--dg-bg);
-  color: var(--dg-text);
-}
-
-a {
-  color: var(--dg-link);
-  text-decoration: none;
-}
-a:hover {
-  color: var(--dg-link-hover);
-  text-decoration: underline;
-}
-
-h1, h2, h3 {
-  color: var(--dg-heading);
-  letter-spacing: 0.1px;
-  margin-top: 0.2rem;
-}
-
-/* Subtle “section divider” like the docs */
-hr {
-  border: 0;
-  border-top: 1px solid var(--dg-border);
-  margin: 2rem 0;
-}
-
-/* =========
-   Three-column layout
-   ========= */
-.home-columns {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.5rem;
-  margin: 1rem 0 2rem;
-}
-
-/* Card-like columns with soft border & shadow */
-.home-col {
-  background: var(--dg-surface);
-  border: 1px solid var(--dg-border);
-  border-radius: 10px;
-  box-shadow: var(--dg-shadow);
-  padding: 1rem 1.1rem;
-}
-
-/* Headings inside cards */
-.home-col h3 {
-  margin: 0 0 0.6rem;
-  font-size: 1.05rem;
-  font-weight: 700;
-}
-
-/* Lists and spacing inside cards */
-.home-col ul {
-  margin: 0.25rem 0 0.25rem 1.1rem;
-}
-.home-col p, .home-col li {
-  color: var(--dg-text);
-}
-
-/* Optional: tiny “accent chips” for inline tags/labels */
-.home-col .chip {
-  display: inline-block;
-  padding: 0.12rem 0.45rem;
-  border-radius: 999px;
-  background: var(--dg-accent-weak);
-  color: var(--dg-accent);
-  font-size: 0.78rem;
-  font-weight: 600;
-}
-
-/* =========
-   Responsive breakpoints (docs-style responsiveness)
-   ========= */
-@media (max-width: 1100px) {
-  .home-columns { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (max-width: 720px) {
-  .home-columns { grid-template-columns: 1fr; }
-}
-
-/* =========
-   Optional: tighten article width like the docs
-   ========= */
+/* Page surface tightening (optional) */
 .main-content, .content, .prose, .markdown-preview-view {
-  max-width: 1100px;
+  max-width: 1180px;
   margin: 0 auto;
   padding: 0 1rem;
 }
 
-/* Optional: code blocks match docs’ subtle background */
-pre, code {
-  background: var(--dg-code-bg);
+/* =========
+   Three-column grid
+   ========= */
+.home-columns {
+  display: grid;
+  grid-template-columns: var(--left-w) var(--middle-w) var(--right-w);
+  gap: 1.25rem;
+  align-items: start;
+  margin: 1rem 0 2rem;
 }
-pre {
-  border: 1px solid var(--dg-border);
+
+/* Card styling for columns */
+.home-col {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--panel-radius);
+  box-shadow: var(--shadow);
+  padding: 1rem 1.1rem;
+}
+
+/* Headings + small polish */
+.home-col h2, .home-col h3 {
+  color: var(--heading);
+  margin: 0 0 0.6rem;
+}
+.home-col p { color: var(--text); }
+.home-col .muted { color: var(--muted); }
+.home-col a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.home-col a:hover { text-decoration: underline; }
+
+/* =========
+   Independent scroll only on LEFT
+   ========= */
+/* The column still sizes naturally, but inner .left-scroll scrolls. */
+.col-left {
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* allows children to define overflow areas */
+}
+
+/* This is the independently scrollable area. */
+.left-scroll {
+  overflow: auto;
+  /* Viewport-based height minus any fixed header/footer you might have */
+  height: calc(100vh - (var(--top-offset) + var(--bottom-offset) + 2rem));
+  /* Optional: little inner padding */
+  padding-right: 0.25rem; /* keeps scrollbar off the text */
+}
+
+/* Optional: make scrollbar slimmer (WebKit-based) */
+.left-scroll::-webkit-scrollbar { width: 10px; }
+.left-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.25);
   border-radius: 8px;
-  padding: 0.75rem 1rem;
-  overflow-x: auto;
 }
+.left-scroll:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.4);
+}
+
+/* =========
+   Responsive breakpoints
+   ========= */
+/* Large tablets: collapse to 2 columns (left + middle), right drops below */
+@media (max-width: 1100px) {
+  .home-columns {
+    grid-template-columns: var(--left-w) 1fr;
+  }
+  .col-right {
+    grid-column: 1 / -1; /* span across underneath */
+  }
+}
+
+/* Phones: single column stack */
+@media (max-width: 720px) {
+  .home-columns {
+    grid-template-columns: 1fr;
+  }
+  .col-left, .col-middle, .col-right {
+    grid-column: auto;
+  }
+  /* On tiny screens, let left behave like a normal block (no fixed height) */
+  .left-scroll { height: auto; max-height: none; }
+}
+
+/* =========
+   Optional extras
+   ========= */
+/* Make right column “sticky” inside page scroll (not independent) */
+.col-right {
+  position: sticky;
+  top: calc(var(--top-offset) + 12px);
+  align-self: start;
+}
+
+/* If you have a fixed top navbar in your DG theme: set --top-offset to its height. */
+/* Example: :root { --top-offset: 56px; } */
