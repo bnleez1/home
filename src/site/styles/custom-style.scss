@@ -1,150 +1,55 @@
-/* =========
-   Base layout + color tokens (tweak to taste)
-   ========= */
+/* === Three-Color Layout for Digital Garden === */
+
+/* Define your palette here */
 :root {
-  --bg: var(--background-primary, #fafbfc);
-  --surface: var(--background-secondary, #ffffff);
-  --border: #e6e9ee;
-  --shadow: 0 1px 4px rgba(0,0,0,0.06);
-
-  --text: var(--text-normal, #1f2937);
-  --muted: #6b7280;
-  --heading: var(--text-title-h1, #111827);
-
-  --accent: #635bff;
-  --accent-weak: #ebe9ff;
-
-  /* Column widths (desktop) */
-  --left-w: 300px;     /* left column width */
-  --middle-w: 1fr;     /* main grows */
-  --right-w: 320px;    /* right column width */
-
-  /* Vertical sizing for independent scroll */
-  --top-offset: 0px;   /* adjust if you have a fixed header/nav */
-  --bottom-offset: 0px;
-  --panel-radius: 10px;
+  --bg-color:   #0f172a; /* dark navy background */
+  --text-color: #e5e7eb; /* light gray text */
+  --accent:     #f59e0b; /* amber accent for links, highlights, etc. */
 }
 
-/* Optional dark alignment */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0d1117;
-    --surface: #0f141b;
-    --border: #1f2a37;
-    --shadow: 0 1px 4px rgba(0,0,0,0.35);
-
-    --text: #d6d9df;
-    --muted: #9aa3af;
-    --heading: #e5e7eb;
-
-    --accent: #8b8af7;
-    --accent-weak: #1b1a2f;
-  }
+/* Apply background + text */
+html, body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, sans-serif;
+  line-height: 1.6;
 }
 
-/* Page surface tightening (optional) */
-.main-content, .content, .prose, .markdown-preview-view {
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: 0 1rem;
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--accent);
+  margin-top: 1.2em;
+  margin-bottom: 0.6em;
 }
 
-/* =========
-   Three-column grid
-   ========= */
-.home-columns {
-  display: grid;
-  grid-template-columns: var(--left-w) var(--middle-w) var(--right-w);
-  gap: 1.25rem;
-  align-items: start;
-  margin: 1rem 0 2rem;
-}
-
-/* Card styling for columns */
-.home-col {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--panel-radius);
-  box-shadow: var(--shadow);
-  padding: 1rem 1.1rem;
-}
-
-/* Headings + small polish */
-.home-col h2, .home-col h3 {
-  color: var(--heading);
-  margin: 0 0 0.6rem;
-}
-.home-col p { color: var(--text); }
-.home-col .muted { color: var(--muted); }
-.home-col a {
+/* Links */
+a {
   color: var(--accent);
   text-decoration: none;
 }
-.home-col a:hover { text-decoration: underline; }
-
-/* =========
-   Independent scroll only on LEFT
-   ========= */
-/* The column still sizes naturally, but inner .left-scroll scrolls. */
-.col-left {
-  display: flex;
-  flex-direction: column;
-  min-height: 0; /* allows children to define overflow areas */
+a:hover, a:focus {
+  text-decoration: underline;
 }
 
-/* This is the independently scrollable area. */
-.left-scroll {
-  overflow: auto;
-  /* Viewport-based height minus any fixed header/footer you might have */
-  height: calc(100vh - (var(--top-offset) + var(--bottom-offset) + 2rem));
-  /* Optional: little inner padding */
-  padding-right: 0.25rem; /* keeps scrollbar off the text */
+/* Blockquotes, code, and selections */
+blockquote {
+  border-left: 4px solid var(--accent);
+  padding-left: 1em;
+  color: var(--text-color);
+  opacity: 0.9;
 }
 
-/* Optional: make scrollbar slimmer (WebKit-based) */
-.left-scroll::-webkit-scrollbar { width: 10px; }
-.left-scroll::-webkit-scrollbar-thumb {
-  background-color: rgba(0,0,0,0.25);
-  border-radius: 8px;
-}
-.left-scroll:hover::-webkit-scrollbar-thumb {
-  background-color: rgba(0,0,0,0.4);
+code, pre {
+  background: color-mix(in srgb, var(--bg-color) 85%, var(--accent));
+  color: var(--accent);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
 }
 
-/* =========
-   Responsive breakpoints
-   ========= */
-/* Large tablets: collapse to 2 columns (left + middle), right drops below */
-@media (max-width: 1100px) {
-  .home-columns {
-    grid-template-columns: var(--left-w) 1fr;
-  }
-  .col-right {
-    grid-column: 1 / -1; /* span across underneath */
-  }
+::selection {
+  background: var(--accent);
+  color: var(--bg-color);
 }
-
-/* Phones: single column stack */
-@media (max-width: 720px) {
-  .home-columns {
-    grid-template-columns: 1fr;
-  }
-  .col-left, .col-middle, .col-right {
-    grid-column: auto;
-  }
-  /* On tiny screens, let left behave like a normal block (no fixed height) */
-  .left-scroll { height: auto; max-height: none; }
-}
-
-/* =========
-   Optional extras
-   ========= */
-/* Make right column “sticky” inside page scroll (not independent) */
-.col-right {
-  position: sticky;
-  top: calc(var(--top-offset) + 12px);
-  align-self: start;
-}
-
-/* If you have a fixed top navbar in your DG theme: set --top-offset to its height. */
-/* Example: :root { --top-offset: 56px; } */
