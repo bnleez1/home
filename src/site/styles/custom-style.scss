@@ -1,21 +1,39 @@
-/* === Three-Color Layout for Digital Garden === */
-
-/* Define your palette here */
+/* === Three-Column Digital Garden Layout (Responsive) === */
+/* Core palette (edit these three values to change site colors) */
 :root {
-  --bg-color:   #0f172a; /* dark navy background */
-  --text-color: #002147; /* Oxford blue */
-  --accent:     #f59e0b; /* amber accent for links, highlights, etc. */
+  --bg-color:   #0f172a; /* background color for all columns */
+  --text-color: #e5e7eb; /* text color for all columns */
+  --accent:     #f59e0b; /* accent color for links/headings */
 }
 
-/* Apply background + text */
+/* Reset + basics */
 html, body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  min-height: 100%;
   margin: 0;
   padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   font-family: system-ui, sans-serif;
   line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Three-column container */
+.container {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr; /* left, middle, right */
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* Column styles */
+.column {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  padding: 1rem;
 }
 
 /* Headings */
@@ -34,11 +52,10 @@ a:hover, a:focus {
   text-decoration: underline;
 }
 
-/* Blockquotes, code, and selections */
+/* Blockquotes, code, selections */
 blockquote {
   border-left: 4px solid var(--accent);
   padding-left: 1em;
-  color: var(--text-color);
   opacity: 0.9;
 }
 
@@ -52,4 +69,11 @@ code, pre {
 ::selection {
   background: var(--accent);
   color: var(--bg-color);
+}
+
+/* === Responsive layout for small screens === */
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr; /* stack columns vertically */
+  }
 }
