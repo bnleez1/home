@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/20-projects/current-uaa-courses/grammar-in-context-i/","tags":["gardenEntry"]}
+{"dg-publish":true,"permalink":"/20-projects/current-uaa-courses/grammar-in-context-i/"}
 ---
 
 > [!important] **Welcome to Communicative Abilities in English I!**
