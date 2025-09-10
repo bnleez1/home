@@ -3,6 +3,8 @@
 ---
 
 # Benjamin L. Stewart
+# Benjamin L. Stewart
+
 <!-- Container that holds the three columns -->
 <div class="home-columns">
 
