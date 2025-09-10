@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/20-projects/current-uaa-courses/sociolinguistics/","tags":["gardenEntry"]}
+{"dg-publish":true,"permalink":"/20-projects/current-uaa-courses/sociolinguistics/"}
 ---
 
   
