@@ -2,6 +2,7 @@
 {"dg-publish":true,"permalink":"/40-resources/images/benjamin-l-stewart/","tags":["burnout","teaching","ELT","gardenEntry"]}
 ---
 
+# Benjamin L. Stewart
 <!-- Container that holds the three columns -->
 <div class="home-columns">
 
