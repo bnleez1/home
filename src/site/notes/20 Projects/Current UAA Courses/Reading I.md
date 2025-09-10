@@ -1,5 +1,5 @@
 ---
-{"dg-publish":true,"permalink":"/20-projects/current-uaa-courses/reading-i/"}
+{"dg-publish":true,"permalink":"/20-projects/current-uaa-courses/reading-i/","tags":["gardenEntry"]}
 ---
 
 > [!important] **Welcome to Reading I!**
