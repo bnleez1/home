@@ -1,9 +1,9 @@
-/* === Three-Column Digital Garden Layout (Responsive) === */
+/* === Three-Column Digital Garden Layout (Responsive + Sticky Sidebars) === */
 /* Core palette (edit these three values to change site colors) */
 :root {
-  --bg-color:   #0f172a; /* background color for all columns */
-  --text-color: #e5e7eb; /* text color for all columns */
-  --accent:     #f59e0b; /* accent color for links/headings */
+  --bg-color:   #0f172a; /* background for all columns */
+  --text-color: #e5e7eb; /* text for all columns */
+  --accent:     #f59e0b; /* links/headings */
 }
 
 /* Reset + basics */
@@ -25,25 +25,26 @@ html, body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 1rem;
-  background-color: var(--bg-color);
-  color: var(--text-color);
 }
 
-/* Column styles */
+/* Column base styles */
 .column {
   background-color: var(--bg-color);
   color: var(--text-color);
   padding: 1rem;
 }
 
-/* Headings */
+/* Identify columns (use these classes in your HTML) */
+.column--left  { }
+.column--center{ }
+.column--right { }
+
+/* Headings & links */
 h1, h2, h3, h4, h5, h6 {
   color: var(--accent);
   margin-top: 1.2em;
   margin-bottom: 0.6em;
 }
-
-/* Links */
 a {
   color: var(--accent);
   text-decoration: none;
@@ -58,22 +59,50 @@ blockquote {
   padding-left: 1em;
   opacity: 0.9;
 }
-
 code, pre {
   background: color-mix(in srgb, var(--bg-color) 85%, var(--accent));
   color: var(--accent);
   padding: 0.2em 0.4em;
   border-radius: 4px;
 }
-
 ::selection {
   background: var(--accent);
   color: var(--bg-color);
 }
 
-/* === Responsive layout for small screens === */
+/* === Sticky sidebars (desktop) ===
+   Keep sidebars visible while center scrolls.
+   If a sidebar is taller than the viewport, it gets its own scroll. */
+.column--left,
+.column--right {
+  position: sticky;
+  top: 1rem;                      /* distance from top while sticking */
+  align-self: start;              /* required for sticky in CSS grid */
+  max-height: calc(100vh - 2rem); /* viewport height minus container padding */
+  overflow: auto;                 /* allow sidebar to scroll if content is long */
+  scrollbar-gutter: stable;       /* optional: reduces layout shift when scrollbar appears */
+}
+
+/* Optional: make center column the main scroller with a subtle inset shadow */
+.column--center {
+  /* Natural page scrolling is usually fine; overflow not required.
+     Uncomment the next two lines if you prefer the center to have its own scroll:
+     max-height: calc(100vh - 2rem);
+     overflow: auto;
+  */
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--text-color) 20%, transparent);
+  border-radius: 8px;
+}
+
+/* === Responsive: stack on small screens === */
 @media (max-width: 768px) {
   .container {
-    grid-template-columns: 1fr; /* stack columns vertically */
+    grid-template-columns: 1fr;    /* single column */
+  }
+  .column--left,
+  .column--right {
+    position: static;              /* disable sticky on mobile */
+    max-height: none;
+    overflow: visible;
   }
 }
