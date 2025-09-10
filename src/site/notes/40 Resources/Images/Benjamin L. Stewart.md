@@ -9,7 +9,7 @@
   <!-- LEFT: independent scroll area -->
   <aside class="home-col col-left">
     <h3>Current Courses</h3>
-    <p class="muted">This panel has its own scroll.</p>
+    <p class="muted"></p>
     <div class="left-scroll">
       <!-- Put lots of items here to test scrolling -->
       <ul>
